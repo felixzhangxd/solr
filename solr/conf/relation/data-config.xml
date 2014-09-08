@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataConfig>
+  <dataSource name="mysql" type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://127.0.0.1:3306/solr?useUnicode=true&amp;characterEncoding=UTF-8" user="solr" password="solr" />
+  <document name="relationDoc">
+    <entity name="relation" dataSource="mysql" query="SELECT id, keyword, hits FROM relation"></entity>
+  </document>
+</dataConfig>
