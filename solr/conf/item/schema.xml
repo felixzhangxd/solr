@@ -14,19 +14,22 @@
         <filter class="solr.RemoveDuplicatesTokenFilterFactory" />
       </analyzer>
     </fieldType>
-    <fieldType name="int" class="solr.IntField" />
-    <fieldType name="long" class="solr.LongField" />
-    <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
-    <fieldType name="date" class="solr.DateField" />
+    <fieldType name="int"    class="solr.IntField" />
+    <fieldType name="double" class="solr.DoubleField" />
+    <fieldType name="long"   class="solr.LongField" />
+    <fieldType name="string" class="solr.StrField" />
+    <fieldType name="date"   class="solr.DateField" />
   </types>
   <fields>
     <field name="_version_"  type="long"    indexed="true" stored="true" multiValued="false" />
     <field name="id"         type="string"  indexed="true" stored="true" multiValued="false" omitNorms="false" required="true" />
-    <field name="keyword"    type="text_cn" indexed="true" stored="true" multiValued="false" omitNorms="true"  required="true" />
-    <field name="hits"       type="int"     indexed="true" stored="true" multiValued="false" omitNorms="true"  required="true" />
-    <field name="last_time"  type="date"    indexed="true" stored="true" multiValued="false" omitNorms="true"  required="true" />
+    <field name="shop_id"    type="string"  indexed="true" stored="true" multiValued="false" omitNorms="false" required="false" />
+    <field name="shop_name"  type="text_cn" indexed="true" stored="true" multiValued="false" omitNorms="false" required="false" />
+    <field name="name"       type="text_cn" indexed="true" stored="true" multiValued="false" omitNorms="true"  required="false" />
+    <field name="remark"     type="text_cn" indexed="true" stored="true" multiValued="false" omitNorms="true"  required="false" />
+    <field name="price"      type="double"  indexed="true" stored="true" multiValued="false" omitNorms="true"  required="false" />
+    <field name="last_time"  type="date"    indexed="true" stored="true" multiValued="false" omitNorms="true"  required="false" />
   </fields>
   <uniqueKey>id</uniqueKey>
-  <defaultSearchField>keyword</defaultSearchField>
   <solrQueryParser defaultOperator="OR" />
 </schema>

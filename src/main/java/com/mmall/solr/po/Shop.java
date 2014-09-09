@@ -5,20 +5,22 @@ import java.sql.Timestamp;
 import org.apache.solr.common.SolrInputDocument;
 
 public class Shop {
-    private Integer id;
-    private String name;
-    private String address;
+    private Integer   id;
+    private String    name;
+    private String    address;
+    private boolean   isDeleted;
     private Timestamp lastTime;
-    
+
     public Shop() {}
 
-    public Shop(Integer id, String name, String address, Timestamp lastTime) {
+    public Shop(Integer id, String name, String address, boolean isDeleted, Timestamp lastTime) {
         this.id = id;
         this.name = name;
         this.address = address;
+        this.isDeleted = isDeleted;
         this.lastTime = lastTime;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -43,6 +45,14 @@ public class Shop {
         this.address = address;
     }
 
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     public Timestamp getLastTime() {
         return lastTime;
     }
@@ -53,9 +63,9 @@ public class Shop {
 
     @Override
     public String toString() {
-        return String.format("id:%s, name:%s, address:%s, lastTime:%s", this.id,this.name,this.address,this.lastTime);
+        return String.format("id:%s, name:%s, address:%s, isDeleted:%s, lastTime:%s", this.id, this.name, this.address,this.isDeleted, this.lastTime);
     }
-    
+
     public SolrInputDocument toDocument() {
         final SolrInputDocument doc = new SolrInputDocument();
         doc.addField("id", this.id);
@@ -64,5 +74,4 @@ public class Shop {
         doc.addField("last_time", this.lastTime);
         return doc;
     }
-    
 }

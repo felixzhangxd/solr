@@ -2,9 +2,11 @@
 <config>
   <luceneMatchVersion>LUCENE_42</luceneMatchVersion>
   <dataDir>${solr.data.dir:}</dataDir>
+  <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.NRTCachingDirectoryFactory}" />
+  <codecFactory class="solr.SchemaCodecFactory" />
   <requestHandler name="/replication" class="solr.ReplicationHandler" startup="lazy" />
-  <requestHandler name="/analysis/field" class="solr.FieldAnalysisRequestHandler" />
   <requestHandler name="standard" class="solr.StandardRequestHandler" default="true" />
+  <requestHandler name="/analysis/field" class="solr.FieldAnalysisRequestHandler" />
   <requestHandler name="/update" class="solr.UpdateRequestHandler" />
   <requestHandler name="/admin/" class="solr.admin.AdminHandlers" />
   <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
@@ -20,7 +22,22 @@
       <str name="config">data-config.xml</str>
     </lst>
   </requestHandler>
+  
+  <updateHandler class="solr.DirectUpdateHandler2">
+    <updateLog>
+      <str name="dir">${solr.data.dir:}</str>
+    </updateLog>
+  </updateHandler>
+  <requestHandler name="/get" class="solr.RealTimeGetHandler">
+    <lst name="defaults">
+      <str name="omitHeader">true</str>
+    </lst>
+  </requestHandler>
+  <requestDispatcher handleSelect="true">
+    <requestParsers enableRemoteStreaming="false" multipartUploadLimitInKB="2048" formdataUploadLimitInKB="2048" />
+  </requestDispatcher>
   <admin>
     <defaultQuery>*:*</defaultQuery>
   </admin>
 </config>
+

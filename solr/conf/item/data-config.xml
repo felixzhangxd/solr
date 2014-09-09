@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataConfig>
+  <dataSource name="ds-1" 
+    type="JdbcDataSource" 
+    driver="com.mysql.jdbc.Driver" 
+    url="jdbc:mysql://127.0.0.1:3306/solr?useUnicode=true&amp;characterEncoding=UTF-8" 
+    user="solr" 
+    password="solr" 
+    batchSize="-1"
+    readOnly="true"
+    autoCommit="true"
+    transactionIsolation="TRANSACTION_READ_COMMITTED" />
+    
+  <document name="itemDoc">
+    <entity name="item"
+      processor="SqlEntityProcessor"
+      dataSource="ds-1"
+      pk="id"
+      query="SELECT id, shop_id, name, remark, price, last_time FROM item WHERE is_deleted=0"
+      deltaQuery="SELECT id FROM item WHERE is_deleted=0 AND last_time > '${dataimporter.item.last_index_time}'"
+      deltaImportQuery="SELECT id, shop_id, name, remark, price, last_time FROM item WHERE id='${dataimporter.delta.id}'"
+      deletedPkQuery="SELECT id FROM item WHERE last_time > '${dataimporter.item.last_index_time}' AND is_deleted=1">
+      <field name="id" column="id"/>
+      <entity name="shop" query="SELECT id,name FROM shop where id='${item.shop_id}'">
+        <field name="shop_id" column="id" />
+        <field name="shop_name" column="name" />
+      </entity>
+      <field name="name" column="name"/>
+      <field name="remark" column="remark"/>
+      <field name="price" column="price"/>
+      <field name="last_time" column="last_time"/>
+    </entity>
+  </document>
+</dataConfig>
