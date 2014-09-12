@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<schema>
+  <types>
+    <!-- 中文切词 -->
+    <fieldType name="text_cn" class="solr.TextField">
+      <analyzer type="index">
+        <tokenizer class="org.wltea.analyzer.solr.IKTokenizerFactory" useSmart="true"/>
+        <filter class="solr.KeepWordFilterFactory" words="keepwords.txt" ignoreCase="true"/>
+        <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
+        <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+      </analyzer>
+      
+      <analyzer type="query">
+        <tokenizer class="org.wltea.analyzer.solr.IKTokenizerFactory" useSmart="true"/>
+        <filter class="solr.KeepWordFilterFactory" words="keepwords.txt" ignoreCase="true"/>
+        <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
+        <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+      </analyzer>
+    </fieldType>
+    <fieldType name="int"    class="solr.IntField" />
+    <fieldType name="double" class="solr.DoubleField" />
+    <fieldType name="long"   class="solr.LongField" />
+    <fieldType name="string" class="solr.StrField" />
+    <fieldType name="date"   class="solr.DateField" />
+  </types>
+  <fields>
+    <field name="_version_"  type="long"    indexed="true" stored="true" multiValued="false" />
+    <field name="id"         type="string"  indexed="true" stored="true" multiValued="false" omitNorms="false" required="true" />
+    <field name="shop_id"    type="string"  indexed="true" stored="true" multiValued="false" omitNorms="false" required="false" />
+    <field name="shop_name"  type="text_cn" indexed="true" stored="true" multiValued="false" omitNorms="false" required="false" />
+    <field name="name"       type="text_cn" indexed="true" stored="true" multiValued="false" omitNorms="true"  required="false" />
+    <field name="remark"     type="text_cn" indexed="true" stored="true" multiValued="false" omitNorms="true"  required="false" />
+    <field name="price"      type="double"  indexed="true" stored="true" multiValued="false" omitNorms="true"  required="false" />
+    <field name="last_time"  type="date"    indexed="true" stored="true" multiValued="false" omitNorms="true"  required="false" />
+  </fields>
+  <uniqueKey>id</uniqueKey>
+  <defaultSearchField>name</defaultSearchField>
+  <solrQueryParser defaultOperator="OR" />
+</schema>

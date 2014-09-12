@@ -1,20 +1,23 @@
-CREATE SCHEMA IF NOT EXISTS solr;
+DROP SCHEMA IF EXISTS solr;
+CREATE SCHEMA IF NOT EXISTS solr CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 USE solr;
 CREATE TABLE `shop` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64),
   `address` varchar(512),
-  `last_time` timestamp,
+  `is_deleted` tinyint(1) NOT NULL,
+  `last_time` timestamp not null DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `shop` (
+CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shop_id` int(11) NOT NULL,
   `name` varchar(64),
-  `desc` varchar(512),
+  `remark` varchar(512),
   `price` double,
-  `last_time` timestamp,
+  `is_deleted` tinyint(1) NOT NULL,
+  `last_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

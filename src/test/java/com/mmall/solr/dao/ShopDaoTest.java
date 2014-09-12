@@ -21,7 +21,9 @@ public class ShopDaoTest {
 
     @Test
     public void testSave() {
-        int i = shopDao.save(new Shop(null, "红星美凯龙", "普陀区真北路1263号新长征商务大厦17楼", new Timestamp(System.currentTimeMillis())));
-        Assert.assertEquals(1, i);
+        int i1 = shopDao.save(new Shop(1, "红星美凯龙星易家线下折扣馆", "普陀区真北路1263号新长征商务大厦17楼",false, new Timestamp(System.currentTimeMillis())));
+        Assert.assertEquals(1, i1);
+        int i2 = shopDao.save(new Shop(2, "TOTO旗舰店", "上大路",false, new Timestamp(System.currentTimeMillis())));
+        Assert.assertEquals(1, i2);
     }
 }

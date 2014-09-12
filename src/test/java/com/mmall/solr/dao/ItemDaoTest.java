@@ -4,8 +4,6 @@ import java.sql.Timestamp;
 
 import javax.annotation.Resource;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,7 +19,10 @@ public class ItemDaoTest {
 
     @Test
     public void testSave() {
-        int i = itemDao.save(new Item(null, 1,"沙发","三喜隆 多功能沙发床 皮艺沙发 折叠双人 带抽屉", 999.9D, new Timestamp(System.currentTimeMillis())));
-        Assert.assertEquals(1, i);
+        itemDao.truncate();
+        itemDao.save(new Item(1, 1, "飞利浦 刮胡刀", "格力 牛B的1P空调", 4999D, false, new Timestamp(System.currentTimeMillis())));
+        itemDao.save(new Item(2, 1, "飞利浦 剃须刀", "格力 牛B的2P空调", 4999D, false, new Timestamp(System.currentTimeMillis())));
+        itemDao.save(new Item(3, 1, "飞利浦 空调", "格力 牛B的3P空调", 4999D, false, new Timestamp(System.currentTimeMillis())));
+        itemDao.save(new Item(4, 1, "飞利浦 电视机", "格力 牛B的4P空调", 4999D, false, new Timestamp(System.currentTimeMillis())));
     }
 }
