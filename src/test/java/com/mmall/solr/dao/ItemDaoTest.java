@@ -25,4 +25,9 @@ public class ItemDaoTest {
         itemDao.save(new Item(3, 1, "飞利浦 空调", "格力 牛B的3P空调", 4999D, false, new Timestamp(System.currentTimeMillis())));
         itemDao.save(new Item(4, 1, "飞利浦 电视机", "格力 牛B的4P空调", 4999D, false, new Timestamp(System.currentTimeMillis())));
     }
+//    @Test
+//    public void testModify() {
+//        int i1 = itemDao.modify(new Item(2, 1, "空调", "大金 操蛋的空调", 4999D, true, new Timestamp(System.currentTimeMillis())));
+//        Assert.assertEquals(1, i1);
+//    }
 }
